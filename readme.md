@@ -25,6 +25,9 @@ const journal = new Journal({
 //   ...
 // }
 export.handler = async (cloudevent, ctx) => {
+  // * https://www.jeremydaly.com/reuse-database-connections-aws-lambda/
+  ctx.callbackWaitsForEmptyEventLoop = false
+
   try {
     const { skip } = await journal.entry({ cloudevent })
     if (skip) return // * Already being performed by another lambda
