@@ -13,6 +13,7 @@
   ],
   "scripts": {
     "build": "rm -rf ./dist && microbundle",
+    "deploy": "npm run build && npm publish",
     "dev": "microbundle watch"
   },
   "repository": {
