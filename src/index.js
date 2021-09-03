@@ -45,7 +45,7 @@ class Journal {
 		let skip = null
 		try {
 			// * Will fail on duplicate because of unique index
-			await collection.insertOne(cloudevent)
+			await collection.insertOne({ ...cloudevent })
 			skip = false
 		} catch (_err) {
 			skip = true
