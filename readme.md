@@ -1,5 +1,9 @@
 # @1mill/journal
 
+## Context
+
+<https://awslabs.github.io/aws-lambda-powertools-python/latest/utilities/idempotency/#idempotency-request-flow>
+
 ## Install
 
 ```bash
