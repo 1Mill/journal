@@ -15,19 +15,12 @@ npm install @1mill/journal
 const { Journal } = require('@1mill/journal')
 
 const journal = new Journal({
-  db: {
-    name: 'development' || process.env.JOURNAL_DB_NAME,
-    uri: 'mongodb://...:27017/' || process.env.JOURNAL_DB_URI,
-  },
-  tableName: 'my.table.name' || process.env.JOURNAL_TABLE_NAME,
+  name: 'my-journal-db' || process.env.1MILL_JOURNAL_NAME,
+  table: 'my-collection' || process.env.1MILL_JOURNAL_TABLE,
+  type: 'mongodb' || process.env.1MILL_JOURNAL_TYPE,
+  uri: 'mongodb://...:27017' || process.env.1MILL_JOURNAL_URI,
 })
 
-// cloudevent = {
-//   id: String,
-//   source: String,
-//   type: String,
-//   ...
-// }
 export.handler = async (cloudevent, ctx) => {
   // * https://www.jeremydaly.com/reuse-database-connections-aws-lambda/
   ctx.callbackWaitsForEmptyEventLoop = false
@@ -46,5 +39,4 @@ export.handler = async (cloudevent, ctx) => {
     throw new Error(err) // * Requeue event to run again
   }
 }
-
 ```
