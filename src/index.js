@@ -1,6 +1,6 @@
 const { MongoClient } = require('mongodb')
 
-const SUPPORTED_TYPES = ['mongo']
+const SUPPORTED_TYPES = ['mongodb']
 
 const fetchNodeEnv = name => process && process.env && process.env[name]
 
@@ -25,7 +25,7 @@ class Journal {
 		this.client = undefined
 
 		// * Run immediately
-		if (!this.type === 'mongo') this._setupMongoIndexes()
+		if (!this.type === 'mongodb') this._setupMongoIndexes()
 	}
 
 	async _collection() {
