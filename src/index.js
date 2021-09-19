@@ -25,7 +25,7 @@ class Journal {
 		this.client = undefined
 
 		// * Run immediately
-		if (!this.type === 'mongodb') this._setupMongoIndexes()
+		if (this.type === 'mongodb') this._setupMongoIndexes()
 	}
 
 	async _collection() {
