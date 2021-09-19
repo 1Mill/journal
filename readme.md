@@ -15,10 +15,10 @@ npm install @1mill/journal
 const { Journal } = require('@1mill/journal')
 
 const journal = new Journal({
-  name: 'my-journal-db' || process.env.1MILL_JOURNAL_NAME,
-  table: 'my-collection' || process.env.1MILL_JOURNAL_TABLE,
-  type: 'mongodb' || process.env.1MILL_JOURNAL_TYPE,
-  uri: 'mongodb://...:27017' || process.env.1MILL_JOURNAL_URI,
+  name: 'my-journal-db' || process.env.MILL_JOURNAL_NAME,
+  table: 'my-collection' || process.env.MILL_JOURNAL_TABLE,
+  type: 'mongodb' || process.env.MILL_JOURNAL_TYPE,
+  uri: 'mongodb://...:27017' || process.env.MILL_JOURNAL_URI,
 })
 
 export.handler = async (cloudevent, ctx) => {

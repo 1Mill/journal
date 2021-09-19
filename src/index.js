@@ -6,19 +6,19 @@ const fetchNodeEnv = name => process && process.env && process.env[name]
 
 class Journal {
 	constructor({ name, options = {}, table, type, uri }) {
-		this.name = name || fetchNodeEnv('1MILL_JOURNAL_NAME')
+		this.name = name || fetchNodeEnv('MILL_JOURNAL_NAME')
 		if (!this.name) throw new Error('Journal "name" is required')
 
 		this.options = options
 
-		this.table = table || fetchNodeEnv('1MILL_JOURNAL_TABLE')
+		this.table = table || fetchNodeEnv('MILL_JOURNAL_TABLE')
 		if (!this.table) throw new Error('Journal "table" is required')
 
-		this.type = type || fetchNodeEnv('1MILL_JOURNAL_TYPE')
+		this.type = type || fetchNodeEnv('MILL_JOURNAL_TYPE')
 		if (!this.type) throw new Error('Journal "type" is required')
 		if (!SUPPORTED_TYPES.includes(this.type)) throw new Error(`Journal "type" ${this.type} is not supported`)
 
-		this.uri = uri || fetchNodeEnv('1MILL_JOURNAL_URI')
+		this.uri = uri || fetchNodeEnv('MILL_JOURNAL_URI')
 		if (!this.uri) throw new Error('Journal "uri" is required')
 
 		// * Database connections
