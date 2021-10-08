@@ -1,5 +1,7 @@
 const { Mongo } = require('@1mill/mongo')
 
+const MONGODB_DUPLICATE_ERROR_CODE = Object.freeze(11000)
+
 const fetchNodeEnv = name => process && process.env && process.env[name]
 
 class Journal {
@@ -40,7 +42,8 @@ class Journal {
 			// ! Create and pass in new object to not mutate original reference
 			// * Will fail on duplicate because of unique index
 			await collection.insertOne({ ...cloudevent })
-		} catch(_err) {
+		} catch(err) {
+			if (err.code !== MONGODB_DUPLICATE_ERROR_CODE) throw err
 			skip = true
 		}
 		return { skip }
