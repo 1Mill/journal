@@ -35,6 +35,6 @@
     "microbundle": "^0.13.3"
   },
   "dependencies": {
-    "@1mill/mongo": "0.0.3"
+    "@1mill/mongo": "0.0.4"
   }
 }
