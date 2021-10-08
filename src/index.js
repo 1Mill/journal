@@ -18,19 +18,19 @@ class Journal {
 		this.uri = uri
 
 		// * State and connection management
-		this.mongo = undefined
+		this.mongoConnectPromise = undefined
 	}
 
 	async entry({ cloudevent }) {
-		if (typeof this.mongo === 'undefined') {
-			this.mongo = new Mongo({
+		if (typeof this.mongoConnectPromise === 'undefined') {
+			this.mongoConnectPromise = new Mongo({
 				db: this.name,
 				options: this.options,
 				uri: this.uri,
-			})
+			}).connect()
 		}
 
-		const { db } = await this.mongo.connect()
+		const { db } = await this.mongoConnectPromise
 		const collection = db.collection(this.table)
 
 		await collection.createIndex({ id: 1, source: 1, type: 1 }, { unique: true })
