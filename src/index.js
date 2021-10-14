@@ -48,6 +48,22 @@ class Journal {
 		}
 		return { skip }
 	}
+
+	async erase({ cloudevent }) {
+		if (typeof this.mongoConnectPromise === 'undefined') {
+			this.mongoConnectPromise = new Mongo({
+				db: this.name,
+				options: this.options,
+				uri: this.uri,
+			}).connect()
+		}
+
+		const { db } = await this.mongoConnectPromise
+		const collection = db.collection(this.table)
+
+		const { id, source, type } = cloudevent
+		await collection.deleteMany({ id, source, type })
+	}
 }
 
 module.exports =  { Journal }
