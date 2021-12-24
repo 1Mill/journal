@@ -17,7 +17,6 @@ const { Journal } = require('@1mill/journal')
 const journal = new Journal({
   name: 'my-journal-db' || process.env.MILL_JOURNAL_NAME,
   table: 'my-collection' || process.env.MILL_JOURNAL_TABLE,
-  type: 'mongodb' || process.env.MILL_JOURNAL_TYPE,
   uri: 'mongodb://...:27017' || process.env.MILL_JOURNAL_URI,
 })
 

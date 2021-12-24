@@ -9,14 +9,12 @@ class Journal {
 		name = fetchNodeEnv('MILL_JOURNAL_NAME'),
 		options = {},
 		table = fetchNodeEnv('MILL_JOURNAL_TABLE'),
-		type = fetchNodeEnv('MILL_JOURNAL_TYPE'),
 		uri = fetchNodeEnv('MILL_JOURNAL_URI'),
 	}) {
 		// * Arguments
 		this.name = name
 		this.options = options
 		this.table = table
-		this.type = type
 		this.uri = uri
 
 		// * State and connection management
