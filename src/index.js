@@ -13,9 +13,16 @@ class Journal {
 	}) {
 		// * Arguments
 		this.name = name
+		if (!this.name) throw new Error('Journal "name" is required')
+
 		this.options = options
+
 		this.table = table
+		if (!this.table) throw new Error('Journal "table" is required')
+
 		this.uri = uri
+		if (!this.uri) throw new Error('Journal "uri" is required')
+
 
 		// * State and connection management
 		this.mongoConnectPromise = undefined
