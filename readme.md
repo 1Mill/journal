@@ -2,7 +2,7 @@
 
 ## Context
 
-<https://awslabs.github.io/aws-lambda-powertools-python/latest/utilities/idempotency/#idempotency-request-flow>
+<https://docs.powertools.aws.dev/lambda/python/latest/utilities/idempotency/#idempotency-request-flow>
 
 ## Install
 
