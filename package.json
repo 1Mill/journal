@@ -1,6 +1,6 @@
 {
   "name": "@1mill/journal",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Idempotently invoke AWS Lambda functions with Cloudevents",
   "source": "src/index.js",
   "type": "module",
