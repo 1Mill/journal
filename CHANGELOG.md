@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.4.1
+
+* Update `README.md` examples.
+
 ## 0.4.0
 
 * Add `withJournal` function to idempotently invoke AWS Lambda functions with Cloudevents.
