@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.4.0
+
+* Add `withJournal` function to idempotently invoke AWS Lambda functions with Cloudevents.
+
 ## 0.3.0
 
 * Change `package.json` `"type"` to `"module"`.

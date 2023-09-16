@@ -1,4 +1,4 @@
-import { Journal } from './index.js'
+import { Journal, withJournal } from './index.js'
 
 const journal = new Journal({
 	name: 'journal',
@@ -10,20 +10,18 @@ const main = async () => {
 	console.log('Starting...')
 
 	const promises = [...Array(1_000)].map(async (_, i) => {
-		try {
-			const { skip } = await journal.entry({
-				cloudevent: {
-					id: i % 5,
-					source: 'abc',
-					type: 'aaa',
-				}
-			})
-			console.log(`Skip event? ${skip}`)
-		} catch (err) {
-			console.error(err)
+		const cloudevent = {
+			id: i % 5,
+			source: 'abc',
+			type: 'aaa',
 		}
+
+		return withJournal(cloudevent, {}, {
+			func: (cloudevent, ctx) => console.log('Running: ', cloudevent),
+			journal,
+		})
 	})
-	await Promise.allSettled(promises)
+	await Promise.all(promises)
 
 	console.log('Finished')
 }
