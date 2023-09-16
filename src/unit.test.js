@@ -1,13 +1,14 @@
-const { Journal } = require('./index')
+import { Journal } from './index.js'
 
 const journal = new Journal({
 	name: 'journal',
 	table: 'some-string',
-	uri: 'mongodb://root:password@mongo-able:27017/',
+	uri: 'mongodb://root:password@mongo:27017/',
 })
 
 const main = async () => {
 	console.log('Starting...')
+
 	const promises = [...Array(1_000)].map(async (_, i) => {
 		try {
 			const { skip } = await journal.entry({
@@ -23,5 +24,8 @@ const main = async () => {
 		}
 	})
 	await Promise.allSettled(promises)
+
+	console.log('Finished')
 }
+
 main()

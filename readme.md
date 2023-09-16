@@ -1,5 +1,7 @@
 # @1mill/journal
 
+Idempotently invoke AWS Lambda functions with Cloudevents
+
 ## Context
 
 <https://docs.powertools.aws.dev/lambda/python/latest/utilities/idempotency/#idempotency-request-flow>

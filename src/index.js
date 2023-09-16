@@ -1,10 +1,10 @@
-const { Mongo } = require('@1mill/mongo')
+import { Mongo } from '@1mill/mongo'
 
 const MONGODB_DUPLICATE_ERROR_CODE = Object.freeze(11000)
 
 const fetchNodeEnv = name => process && process.env && process.env[name]
 
-class Journal {
+export class Journal {
 	constructor({
 		name = fetchNodeEnv('MILL_JOURNAL_NAME'),
 		options = {},
@@ -70,5 +70,3 @@ class Journal {
 		await collection.deleteMany({ id, source, type })
 	}
 }
-
-module.exports =  { Journal }

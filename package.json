@@ -1,20 +1,23 @@
 {
   "name": "@1mill/journal",
   "version": "0.2.5",
-  "description": "",
+  "description": "Idempotently invoke AWS Lambda functions with Cloudevents",
   "source": "src/index.js",
-  "jsnext:main": "dist/index.module.js",
-  "main": "dist/index.js",
-  "module": "dist/index.module.js",
-  "umd:main": "dist/index.umd.js",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.module.js",
+  "unpkg": "./dist/index.umd.js",
   "files": [
     "dist",
     "src"
   ],
   "scripts": {
-    "build": "rm -rf ./dist && microbundle",
+    "build": "rm -rf ./dist && npm run build:browser && npm run build:node",
+    "build:browser": "microbundle --format modern,umd --external none",
+    "build:node": "microbundle --format cjs,esm",
     "deploy": "npm run build && npm publish",
-    "dev": "microbundle watch"
+    "dev": "microbundle watch",
+    "test": "node ./src/unit.test.js"
   },
   "repository": {
     "type": "git",
@@ -32,9 +35,9 @@
   },
   "homepage": "https://github.com/1mill/journal#readme",
   "devDependencies": {
-    "microbundle": "^0.13.3"
+    "microbundle": "^0.15.1"
   },
   "dependencies": {
-    "@1mill/mongo": "0.0.5"
+    "@1mill/mongo": "^0.3.4"
   }
 }
