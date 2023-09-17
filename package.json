@@ -38,6 +38,7 @@
     "microbundle": "^0.15.1"
   },
   "dependencies": {
-    "@1mill/mongo": "^0.3.4"
+    "@1mill/mongo": "^0.3.4",
+    "date-fns": "^2.30.0"
   }
 }

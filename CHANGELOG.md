@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.5.0
+
+* (**BREAKING**) Expire Cloudevent idempotency key after one day by default, which may be changed through `expireAfterSeconds`.
+
 ## 0.4.1
 
 * Update `README.md` examples.
