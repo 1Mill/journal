@@ -35,5 +35,6 @@ export.handler = async (cloudevent, ctx) => withJournal(cloudevent, ctx, { func,
 
 ## References
 
+* <https://developer.ibm.com/tutorials/reactive-in-practice-5/>
 * <https://docs.powertools.aws.dev/lambda/python/latest/utilities/idempotency/#idempotency-request-flow>
 * <https://multithreaded.stitchfix.com/blog/2017/06/26/patterns-of-soa-idempotency-key/>
