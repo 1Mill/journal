@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.6.0
+
+* Add `Locker` and `withIdempotency` exports.
+* `Journal` and `withJournal` are depricated and will be removed in the next major release.
+
 ## 0.5.0
 
 * **⚠ BREAKING** - Expire Cloudevent idempotency key after one day by default, which may be changed through `expireAfterSeconds`.
