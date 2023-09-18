@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.6.1
+
+* Fix bug with parsing environmental variables.
+
 ## 0.6.0
 
 * Add `Locker` and `withIdempotency` exports.
