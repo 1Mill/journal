@@ -5,35 +5,38 @@ import { warning } from './warning.js'
 
 const DEFAULT_EXPIRE_AFTER_SECONDS = Object.freeze(24 * 60 * 60) // * One day in seconds
 const MONGODB_DUPLICATE_ERROR_CODE = Object.freeze(11000)
-const TTL_KEY = Object.freeze('_expireAfter')
+const TTL_KEY = Object.freeze('_unlockAfter')
 
-export class Journal {
+export class Locker {
 	constructor({
-		expireAfterSeconds = tryNodeEnvs(['MILL_JOURNAL_EXPIRE_AFTER_SECONDS'], DEFAULT_EXPIRE_AFTER_SECONDS),
-		name = tryNodeEnvs(['MILL_JOURNAL_NAME']),
+		expireAfterSeconds = tryNodeEnvs(['MILL_LOCKER_EXPIRE_AFTER_SECONDS', 'MILL_JOURNAL_EXPIRE_AFTER_SECONDS'], DEFAULT_EXPIRE_AFTER_SECONDS),
+		name = tryNodeEnvs(['MILL_LOCKER_NAME', 'MILL_JOURNAL_NAME']),
 		options = {},
-		table = tryNodeEnvs(['MILL_JOURNAL_TABLE']),
-		uri = tryNodeEnvs(['MILL_JOURNAL_URI']),
+		table = tryNodeEnvs(['MILL_LOCKER_TABLE', 'MILL_JOURNAL_TABLE']),
+		uri = tryNodeEnvs(['MILL_LOCKER_URI', 'MILL_JOURNAL_URI']),
 	}) {
 		// * Arguments
 		this.expireAfterSeconds = expireAfterSeconds
-		if (typeof this.expireAfterSeconds !== 'number') throw new Error('Journal "expireAfterSeconds" must be a number')
-		if (this.expireAfterSeconds < 0) throw new Error('Journal "expireAfterSeconds" must be greater than or equal to zero')
+		if (typeof this.expireAfterSeconds !== 'number') throw new Error('Locker "expireAfterSeconds" must be a number')
+		if (this.expireAfterSeconds < 0) throw new Error('Locker "expireAfterSeconds" must be greater than or equal to zero')
 
 		this.name = name
-		if (!this.name) throw new Error('Journal "name" is required')
+		if (!this.name) throw new Error('Locker "name" is required')
 
 		this.options = options
 
 		this.table = table
-		if (!this.table) throw new Error('Journal "table" is required')
+		if (!this.table) throw new Error('Locker "table" is required')
 
 		this.uri = uri
-		if (!this.uri) throw new Error('Journal "uri" is required')
+		if (!this.uri) throw new Error('Locker "uri" is required')
 
 
 		// * State and connection management
 		this.mongoConnectPromise = undefined
+
+		// * Run immedidately
+		warning('"Journal" is depricated and will be removed on the next major release, used "Locker" instead.')
 	}
 
 	async _collection() {

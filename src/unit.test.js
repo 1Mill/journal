@@ -1,6 +1,6 @@
-import { Journal, withJournal } from './index.js'
+import { Locker, withIdempotency } from './index.js'
 
-const journal = new Journal({
+const locker = new Locker({
 	expireAfterSeconds: 60,
 	name: 'journal',
 	table: 'some-string',
@@ -18,9 +18,9 @@ const main = async () => {
 			type: 'aaa',
 		}
 
-		return withJournal(cloudevent, {}, {
+		return withIdempotency(cloudevent, {}, {
 			func: (cloudevent, ctx) => console.log('Running: ', cloudevent),
-			journal,
+			locker,
 		})
 	})
 	await Promise.all(promises)

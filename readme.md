@@ -10,20 +10,23 @@ npm install @1mill/journal
 
 ```js
 // * index.js
-const { Journal, withJournal } = require('@1mill/journal')
+import { Locker, withIdempotency } from '@1mill/journal'
 
-const journal = new Journal({
-  name:  'my-journal-db' || process.env.MILL_JOURNAL_NAME,
-  table: 'my-collection' || process.env.MILL_JOURNAL_TABLE,
-  uri:   'mongodb://...:27017' || process.env.MILL_JOURNAL_URI,
+const locker = new Locker({
+  name:  'my-locker-db-name',
+  table: 'my-collection-name',
+  uri:   'mongodb://...:27017/',
 })
 
 const func = (cloudevent, ctx) => {
   console.log('Running once: ', cloudevent)
+  return { cloudevent }
 }
 
-export.handler = async (cloudevent, ctx) => withJournal(cloudevent, ctx, { func, journal })
+export const handler = async (cloudevent, ctx) => withIdempotency(cloudevent, ctx, { func, locker })
 ```
+
+### Locker
 
 | Name               | Required | Types  | Default         | Environment                         | Description                                           |
 |--------------------|----------|--------|-----------------|-------------------------------------|-------------------------------------------------------|
@@ -32,6 +35,13 @@ export.handler = async (cloudevent, ctx) => withJournal(cloudevent, ctx, { func,
 | options            |          | object | `{}`            |                                     | Options pass to the database client                   |
 | table              | yes      | string |                 | `MILL_JOURNAL_TABLE`                | The name of the table inside the database             |
 | uri                | yes      | string |                 | `MILL_JOURNAL_URI`                  | URI to connect to database                            |
+
+### withIdempotency
+
+| Name               | Required | Types    | Default         | Environment                       | Description                                                    |
+|--------------------|----------|----------|-----------------|-----------------------------------|----------------------------------------------------------------|
+| func               | yes      | function |                 |                                   | The function containing business logic that will run           |
+| locker             | yes      | `Locker` |                 |                                   | The `Locker` in which idempotency keys will be checked against |
 
 ## References
 
